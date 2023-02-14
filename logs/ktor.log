@@ -1,0 +1,49 @@
+[2023-02-14 07:01:58,504]-[main] INFO  [Koin] - loaded 6 definitions in 1.618386 ms
+[2023-02-14 07:01:59,987]-[main] INFO  Exposed - Preparing create tables statements took 123ms
+[2023-02-14 07:02:00,046]-[main] INFO  Exposed - Executing create tables statements took 59ms
+[2023-02-14 07:02:00,069]-[main] INFO  Exposed - Extracting table columns took 23ms
+[2023-02-14 07:02:00,162]-[main] INFO  Exposed - Extracting column constraints took 88ms
+[2023-02-14 07:02:00,164]-[main] INFO  Exposed - Preparing alter table statements took 118ms
+[2023-02-14 07:02:00,168]-[main] INFO  Exposed - Executing alter table statements took 3ms
+[2023-02-14 07:02:00,265]-[main] INFO  Exposed - Checking mapping consistence took 97ms
+[2023-02-14 07:02:00,289]-[main] INFO  Application - Application started in 3.152 seconds.
+[2023-02-14 07:02:00,739]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 14:02:20,892]-[main] INFO  [Koin] - loaded 6 definitions in 1.740018 ms
+[2023-02-14 14:02:21,691]-[main] INFO  Exposed - Preparing create tables statements took 88ms
+[2023-02-14 14:02:21,700]-[main] INFO  Exposed - Executing create tables statements took 8ms
+[2023-02-14 14:02:21,714]-[main] INFO  Exposed - Extracting table columns took 14ms
+[2023-02-14 14:02:21,741]-[main] INFO  Exposed - Extracting column constraints took 25ms
+[2023-02-14 14:02:21,742]-[main] INFO  Exposed - Preparing alter table statements took 42ms
+[2023-02-14 14:02:21,743]-[main] INFO  Exposed - Executing alter table statements took 1ms
+[2023-02-14 14:02:21,781]-[main] INFO  Exposed - Checking mapping consistence took 38ms
+[2023-02-14 14:02:21,785]-[main] INFO  Application - Application started in 1.679 seconds.
+[2023-02-14 14:02:21,994]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 14:26:08,398]-[main] INFO  [Koin] - loaded 6 definitions in 1.278153 ms
+[2023-02-14 14:26:09,006]-[main] INFO  Exposed - Preparing create tables statements took 51ms
+[2023-02-14 14:26:09,018]-[main] INFO  Exposed - Executing create tables statements took 12ms
+[2023-02-14 14:26:09,032]-[main] INFO  Exposed - Extracting table columns took 14ms
+[2023-02-14 14:26:09,058]-[main] INFO  Exposed - Extracting column constraints took 24ms
+[2023-02-14 14:26:09,059]-[main] INFO  Exposed - Preparing alter table statements took 41ms
+[2023-02-14 14:26:09,060]-[main] INFO  Exposed - Executing alter table statements took 1ms
+[2023-02-14 14:26:09,086]-[main] INFO  Exposed - Checking mapping consistence took 26ms
+[2023-02-14 14:26:09,090]-[main] INFO  Application - Application started in 1.575 seconds.
+[2023-02-14 14:26:09,332]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 16:39:10,196]-[main] INFO  [Koin] - loaded 6 definitions in 1.888701 ms
+[2023-02-14 16:39:11,010]-[main] INFO  Exposed - Preparing create tables statements took 62ms
+[2023-02-14 16:39:11,022]-[main] INFO  Exposed - Executing create tables statements took 12ms
+[2023-02-14 16:39:11,044]-[main] INFO  Exposed - Extracting table columns took 21ms
+[2023-02-14 16:39:11,072]-[main] INFO  Exposed - Extracting column constraints took 25ms
+[2023-02-14 16:39:11,072]-[main] INFO  Exposed - Preparing alter table statements took 49ms
+[2023-02-14 16:39:11,073]-[main] INFO  Exposed - Executing alter table statements took 1ms
+[2023-02-14 16:39:11,113]-[main] INFO  Exposed - Checking mapping consistence took 40ms
+[2023-02-14 16:39:11,117]-[main] INFO  Application - Application started in 1.769 seconds.
+[2023-02-14 16:39:11,351]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 16:40:35,354]-[main] INFO  [Koin] - loaded 6 definitions in 1.339161 ms
+[2023-02-14 16:40:35,359]-[main] INFO  Application - Application started in 0.769 seconds.
+[2023-02-14 16:40:35,536]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 16:44:13,846]-[main] INFO  [Koin] - loaded 6 definitions in 0.98254 ms
+[2023-02-14 16:44:13,849]-[main] INFO  Application - Application started in 0.711 seconds.
+[2023-02-14 16:44:14,019]-[main] INFO  Application - Responding at http://0.0.0.0:8080
+[2023-02-14 21:47:21,878]-[main] INFO  [Koin] - loaded 6 definitions in 0.989798 ms
+[2023-02-14 21:47:21,882]-[main] INFO  Application - Application started in 1.053 seconds.
+[2023-02-14 21:47:22,112]-[main] INFO  Application - Responding at http://0.0.0.0:8080
