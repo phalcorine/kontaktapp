@@ -17,7 +17,7 @@
 ### Features:
 * [ ] Authentication
 * [x] Contacts Management
-* [x] Task Management
+* [ ] Task Management
 * [ ] User Preferences
 * [ ] UI Enhancements
 
