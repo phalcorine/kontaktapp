@@ -14,6 +14,13 @@
 * Ktor - Http Client
 * KVision Modules - Rich Integrations and Libraries for Frontend Development
 
+### Features:
+* [ ] Authentication
+* [x] Contacts Management
+* [x] Task Management
+* [ ] User Preferences
+* [ ] UI Enhancements
+
 ### Note:
 The project can be used with or without a database.
 * To use without a database, set the `settings.useInMemoryStorage` property in `src/backendMain/resources/application.conf` to `true`
