@@ -11,9 +11,7 @@ sealed interface ApiError {
             get() = HttpStatusCode.BadRequest
     }
 
-    object UnauthenticatedError : ApiError {
-        override val message: String
-            get() = "You are currently not authenticated!"
+    data class UnauthenticatedError(override val message: String = "You are currently not authenticated!") : ApiError {
         override val httpStatusCode: HttpStatusCode
             get() = HttpStatusCode.Unauthorized
     }
@@ -26,6 +24,11 @@ sealed interface ApiError {
     data class NotFoundError(override val message: String) : ApiError {
         override val httpStatusCode: HttpStatusCode
             get() = HttpStatusCode.NotFound
+    }
+
+    data class ConflictRecordError(override val message: String) : ApiError {
+        override val httpStatusCode: HttpStatusCode
+            get() = HttpStatusCode.Conflict
     }
 
     data class GenericError(override val message: String) : ApiError {

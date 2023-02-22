@@ -1,4 +1,4 @@
-package io.androkage.kontakt.kontaktapp.app.landing.pages.LandingPage
+package io.androkage.kontakt.kontaktapp.app.layout.shared.appHeader
 
 import com.copperleaf.ballast.EventHandler
 import com.copperleaf.ballast.EventHandlerScope
@@ -8,22 +8,26 @@ import com.copperleaf.ballast.navigation.routing.directions
 import io.androkage.kontakt.kontaktapp.app.AppRouter
 import io.androkage.kontakt.kontaktapp.app.AppRouterViewModel
 
-class LandingPageEventHandler(
+class AppHeaderEventHandler(
     private val routerViewModel: AppRouterViewModel
 ) : EventHandler<
-        LandingPageContract.Inputs,
-        LandingPageContract.Events,
-        LandingPageContract.State> {
+        AppHeaderContract.Inputs,
+        AppHeaderContract.Events,
+        AppHeaderContract.State> {
     override suspend fun EventHandlerScope<
-            LandingPageContract.Inputs,
-            LandingPageContract.Events,
-            LandingPageContract.State>.handleEvent(
-        event: LandingPageContract.Events
+            AppHeaderContract.Inputs,
+            AppHeaderContract.Events,
+            AppHeaderContract.State>.handleEvent(
+        event: AppHeaderContract.Events
     ) = when (event) {
-        is LandingPageContract.Events.NavigateToContactListPage -> {
+        is AppHeaderContract.Events.LogOut -> {
+            postInput(AppHeaderContract.Inputs.LogOut)
+        }
+
+        is AppHeaderContract.Events.NavigateToLogin -> {
             routerViewModel.trySend(
                 RouterContract.Inputs.GoToDestination(
-                    AppRouter.ContactList.directions().build()
+                    AppRouter.Login.directions().build()
                 )
             )
             Unit

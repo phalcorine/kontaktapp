@@ -3,11 +3,15 @@ package io.androkage.kontakt.kontaktapp
 import com.copperleaf.ballast.navigation.routing.*
 import io.androkage.kontakt.kontaktapp.app.AppRouter
 import io.androkage.kontakt.kontaktapp.app.AppRouterViewModel
+import io.androkage.kontakt.kontaktapp.app.auth.pages.login.loginPage
+import io.androkage.kontakt.kontaktapp.app.auth.pages.register.signupPage
 import io.androkage.kontakt.kontaktapp.app.contacts.pages.contactAdd.contactAddPage
 import io.androkage.kontakt.kontaktapp.app.contacts.pages.contactDetail.contactDetailPage
 import io.androkage.kontakt.kontaktapp.app.contacts.pages.contactList.contactListPage
 import io.androkage.kontakt.kontaktapp.app.initializeKoin
-import io.androkage.kontakt.kontaktapp.app.landing.pages.LandingPage.landingPage
+import io.androkage.kontakt.kontaktapp.app.landing.pages.landingPage.landingPage
+import io.androkage.kontakt.kontaktapp.app.layout.shared.appHeader.appHeader
+import io.androkage.kontakt.kontaktapp.repository.auth.AuthRepository
 import io.kvision.Application
 import io.kvision.CoreModule
 import io.kvision.BootstrapModule
@@ -40,21 +44,31 @@ val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 class App : Application(), KoinComponent {
 
     init {
+        io.kvision.require("css/auth.css")
         io.kvision.require("css/dashboard.css")
     }
 
     override fun start(state: Map<String, Any>) {
         val root = root("kvapp") {
             val router by inject<AppRouterViewModel>()
+            val authRepo by inject<AuthRepository>()
 
             div().bind(router) { appRouterState ->
                 val routerState = appRouterState.backstack
+
+                appHeader()
 
                 routerState.renderCurrentDestination(
                     route = { appRouter ->
                         when (appRouter) {
                             AppRouter.Home -> {
                                 landingPage()
+                            }
+                            AppRouter.Login -> {
+                                loginPage()
+                            }
+                            AppRouter.Signup -> {
+                                signupPage()
                             }
                             AppRouter.ContactList -> {
                                 contactListPage()
@@ -79,6 +93,9 @@ class App : Application(), KoinComponent {
                     }
                 )
             }
+
+            // Initialize Auth Repo
+            authRepo.initialize()
         }
     }
 }

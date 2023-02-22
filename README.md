@@ -5,17 +5,17 @@
 * KVision (Kotlin/JS) - Frontend Web Application
 
 ### Libraries Used:
-* Arrow (Core) - Error Handling and Monads
-* Ballast (Core & Navigation) - Frontend State Management and Routing
-* JetBrains Exposed - Database ORM Framework
-* JDBC Drivers (H2 / MySQL) - Database Access
-* Koin - Dependency Injection + Ktor Bindings
-* kotlinx-datetime - Multiplatform Datetime Library
-* Ktor - Http Client
-* KVision Modules - Rich Integrations and Libraries for Frontend Development
+* <a href="https://arrow-kt.io">Arrow (Core)</a> - Error Handling and Monads
+* <a href="https://copper-leaf.github.io/ballast">Ballast (Core & Navigation)</a> - Frontend State Management and Routing
+* <a href="https://github.com/JetBrains/Exposed">JetBrains Exposed</a> - Database ORM Framework
+* JDBC Drivers (<a href="https://www.h2database.com">H2</a> / <a href="https://dev.mysql.com/downloads/connector/j/">MySQL</a>) - Database Access
+* <a href="https://insert-koin.io">Koin</a> - Dependency Injection + Ktor Bindings
+* <a href="https://github.com/Kotlin/kotlinx-datetime">kotlinx-datetime</a> - Multiplatform Datetime Library
+* <a href="https://ktor.io">Ktor</a> - Http Client
+* <a href="https://kvision.gitbook.io/kvision-guide/1.-getting-started-1/modules">KVision Modules</a> - Rich Integrations and Libraries for Frontend Development
 
 ### Features:
-* [ ] Authentication
+* [x] Authentication
 * [x] Contacts Management
 * [ ] Task Management
 * [ ] User Preferences

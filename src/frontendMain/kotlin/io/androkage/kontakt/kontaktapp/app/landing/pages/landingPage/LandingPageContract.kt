@@ -1,4 +1,4 @@
-package io.androkage.kontakt.kontaktapp.app.landing.pages.LandingPage
+package io.androkage.kontakt.kontaktapp.app.landing.pages.landingPage
 
 object LandingPageContract {
     data class State(

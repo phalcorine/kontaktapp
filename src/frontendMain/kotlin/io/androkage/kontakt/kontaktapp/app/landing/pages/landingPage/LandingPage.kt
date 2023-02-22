@@ -1,4 +1,4 @@
-package io.androkage.kontakt.kontaktapp.app.landing.pages.LandingPage
+package io.androkage.kontakt.kontaktapp.app.landing.pages.landingPage
 
 import io.androkage.kontakt.kontaktapp.app.layout.mainLayout.mainLayout
 import io.kvision.core.Container

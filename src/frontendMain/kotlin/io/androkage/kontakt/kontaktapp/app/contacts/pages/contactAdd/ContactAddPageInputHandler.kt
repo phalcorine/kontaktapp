@@ -2,10 +2,10 @@ package io.androkage.kontakt.kontaktapp.app.contacts.pages.contactAdd
 
 import com.copperleaf.ballast.InputHandler
 import com.copperleaf.ballast.InputHandlerScope
-import io.androkage.kontakt.kontaktapp.endpoints.ContactEndpointService
+import io.androkage.kontakt.kontaktapp.endpoints.IContactEndpointService
 
 class ContactAddPageInputHandler(
-    private val contactEndpointService: ContactEndpointService
+    private val contactEndpointService: IContactEndpointService
 ) : InputHandler<
         ContactAddPageContract.Inputs,
         ContactAddPageContract.Events,
@@ -19,14 +19,19 @@ class ContactAddPageInputHandler(
         is ContactAddPageContract.Inputs.CreateContact -> {
             updateState { state -> state.copy(loading = true) }
 
-            val eitherResult = contactEndpointService.create(input.data)
-            eitherResult.fold({
-                updateState { state -> state.copy(loading = false) }
-                postEvent(ContactAddPageContract.Events.ErrorMessage(it.message))
-            }, {
+            val apiResult = runCatching {
+                contactEndpointService.create(input.data)
+            }.getOrElse {
+                Result.failure(it)
+            }
+
+            apiResult.fold({
                 updateState { state -> state.copy(loading = false) }
                 postEvent(ContactAddPageContract.Events.SuccessMessage("Contact Added Successfully!"))
                 postEvent(ContactAddPageContract.Events.NavigateToContactListPage)
+            }, {
+                updateState { state -> state.copy(loading = false) }
+                postEvent(ContactAddPageContract.Events.ErrorMessage(it.message ?: "API Error!"))
             })
         }
 

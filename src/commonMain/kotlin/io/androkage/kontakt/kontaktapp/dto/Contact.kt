@@ -11,7 +11,9 @@ data class ContactDto(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val phoneNumbers: List<ContactPhoneNumberDto> = emptyList(),
-    val emails: List<ContactEmailDto> = emptyList()
+    val emails: List<ContactEmailDto> = emptyList(),
+    // relations
+    val userUid: String,
 )
 
 @Serializable

@@ -3,10 +3,10 @@ package io.androkage.kontakt.kontaktapp.app.contacts.pages.contactList
 import com.copperleaf.ballast.InputHandler
 import com.copperleaf.ballast.InputHandlerScope
 import com.copperleaf.ballast.postInput
-import io.androkage.kontakt.kontaktapp.endpoints.ContactEndpointService
+import io.androkage.kontakt.kontaktapp.endpoints.IContactEndpointService
 
 class ContactListPageInputHandler(
-    private val contactEndpointService: ContactEndpointService
+    private val contactEndpointService: IContactEndpointService
 ) : InputHandler<
         ContactListPageContract.Inputs,
         ContactListPageContract.Events,
@@ -20,13 +20,18 @@ class ContactListPageInputHandler(
         is ContactListPageContract.Inputs.RefreshContacts -> {
             updateState { state -> state.copy(loading = true) }
 
-            val eitherResult = contactEndpointService.list()
-            eitherResult.fold({ error ->
-                updateState { state -> state.copy(loading = false) }
-                postEvent(ContactListPageContract.Events.ErrorMessage(error.message))
-            }, { response ->
+            val apiResult = runCatching {
+                contactEndpointService.list()
+            }.getOrElse {
+                Result.failure(it)
+            }
+
+            apiResult.fold({ response ->
                 updateState { state -> state.copy(loading = false) }
                 postInput(ContactListPageContract.Inputs.LoadedContacts(response.data))
+            }, { error ->
+                updateState { state -> state.copy(loading = false) }
+                postEvent(ContactListPageContract.Events.ErrorMessage(error.message ?: "API Error!"))
             })
         }
 

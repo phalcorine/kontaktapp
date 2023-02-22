@@ -38,4 +38,10 @@ suspend fun PipelineContext<Unit, ApplicationCall>.handleError(error: ApiError):
             ApiErrorResponse(error.message)
         )
     }
+    is ApiError.ConflictRecordError -> {
+        call.respond(
+            status = error.httpStatusCode,
+            ApiErrorResponse(error.message)
+        )
+    }
 }

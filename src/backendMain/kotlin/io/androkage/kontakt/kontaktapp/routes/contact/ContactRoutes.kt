@@ -3,7 +3,7 @@ package io.androkage.kontakt.kontaktapp.routes.contact
 import arrow.core.continuations.either
 import io.androkage.kontakt.kontaktapp.dto.CreateContactDto
 import io.androkage.kontakt.kontaktapp.dto.UpdateContactDto
-import io.androkage.kontakt.kontaktapp.endpoints.ContactEndpointService
+import io.androkage.kontakt.kontaktapp.endpoints.IContactEndpointService
 import io.androkage.kontakt.kontaktapp.error.ApiError
 import io.androkage.kontakt.kontaktapp.routes.handleError
 import io.ktor.http.*
@@ -13,9 +13,10 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
+/*
 fun Route.contactRoutes() {
 
-    val contactEndpointService by inject<ContactEndpointService>()
+    val contactEndpointService by inject<IContactEndpointService>()
 
     route("/contacts") {
 
@@ -93,4 +94,4 @@ fun Route.contactRoutes() {
             }
         }
     }
-}
+}*/
