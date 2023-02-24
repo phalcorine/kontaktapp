@@ -6,8 +6,6 @@ import io.androkage.kontakt.kontaktapp.data.facades.ContactEmailFacade
 import io.androkage.kontakt.kontaktapp.data.facades.ContactFacade
 import io.androkage.kontakt.kontaktapp.data.facades.ContactPhoneNumberFacade
 import io.androkage.kontakt.kontaktapp.dto.*
-import io.androkage.kontakt.kontaktapp.error.ApiError
-import io.androkage.kontakt.kontaktapp.plugins.JWT_CLAIM_PRINCIPAL
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -49,7 +47,7 @@ actual class ContactEndpointService(
                 Either.Right(ApiDataResource(contacts))
             }.bind()
         }.fold({
-            throw ServiceException(it.message)
+            Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
@@ -81,7 +79,7 @@ actual class ContactEndpointService(
                 Either.Right(ApiDataResource(loadedContact))
             }.bind()
         }.fold({
-            throw ServiceException(it.message)
+            Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
@@ -114,7 +112,7 @@ actual class ContactEndpointService(
                 Either.Right(ApiDataResource(entityUid))
             }.bind()
         }.fold({
-            throw ServiceException(it.message)
+            Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
@@ -159,7 +157,7 @@ actual class ContactEndpointService(
                 Either.Right(ApiDataResource(entityUid))
             }.bind()
         }.fold({
-           throw ServiceException(it.message)
+           Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
@@ -186,7 +184,7 @@ actual class ContactEndpointService(
                 Either.Right(ApiDataResource(entityUid))
             }.bind()
         }.fold({
-           throw ServiceException(it.message)
+           Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })

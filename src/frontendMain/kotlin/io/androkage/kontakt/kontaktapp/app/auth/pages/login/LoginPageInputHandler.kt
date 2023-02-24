@@ -5,8 +5,6 @@ import com.copperleaf.ballast.InputHandlerScope
 import io.androkage.kontakt.kontaktapp.dto.AuthLoginRequestDto
 import io.androkage.kontakt.kontaktapp.endpoints.IAuthEndpointService
 import io.androkage.kontakt.kontaktapp.repository.auth.AuthRepository
-import io.kvision.modal.Alert
-import io.kvision.toast.Toast
 
 class LoginPageInputHandler(
     private val authEndpointService: IAuthEndpointService,

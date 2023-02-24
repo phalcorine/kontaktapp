@@ -16,7 +16,7 @@ actual class AuthCheckerEndpointService(
                 Either.Right(ApiSuccessResponse("Authentication Successful!"))
             }.bind()
         }.fold({
-            throw Exception(it.message)
+            Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })

@@ -41,7 +41,7 @@ actual class AuthEndpointService(
                 )
             )
         }.fold({
-           throw ServiceException(it.message)
+           Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
@@ -71,7 +71,7 @@ actual class AuthEndpointService(
 
             ApiSuccessResponse("Account created successfully!")
         }.fold({
-            throw ServiceException(it.message)
+            Result.failure(ServiceException(it.message))
         }, {
             Result.success(it)
         })
