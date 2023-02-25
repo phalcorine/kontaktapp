@@ -7,7 +7,6 @@ import com.copperleaf.ballast.eventHandler
 import com.copperleaf.ballast.navigation.browser.withBrowserHashRouter
 import com.copperleaf.ballast.navigation.routing.*
 import com.copperleaf.ballast.navigation.vm.BasicRouter
-import com.copperleaf.ballast.navigation.vm.withRouter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.Serializable
 import org.koin.core.module.dsl.singleOf
@@ -19,9 +18,11 @@ enum class AppRouter(
     override val annotations: Set<RouteAnnotation> = emptySet()
 ) : Route {
     Home("/home"),
-    ContactList("/contact/list"),
-    ContactAdd("/contact/add"),
-    ContactDetail("/contact/detail/{uid}");
+    Login("/auth/login"),
+    Signup("/auth/signup"),
+    ContactList("/contacts/list"),
+    ContactAdd("/contacts/add"),
+    ContactDetail("/contacts/detail/{uid}");
 
     override val matcher: RouteMatcher = RouteMatcher.create(routeFormat)
 }

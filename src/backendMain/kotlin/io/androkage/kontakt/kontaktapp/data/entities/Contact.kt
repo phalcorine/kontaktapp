@@ -9,14 +9,17 @@ object ContactTable : IntIdTable("contacts") {
     val uid = varchar("uid", 100).uniqueIndex()
     val name = varchar("name", 100)
     val note = varchar("note", 200).nullable()
-    val created_at = datetime("created_at")
-    val updated_at = datetime("updated_at")
+    val createdAt = datetime("created_at")
+    val updatedAt = datetime("updated_at")
+    // relations
+    val userUid = reference("user_uid", UserTable.uid)
 }
 
 fun ResultRow.toContactDto() = ContactDto(
     uid = this[ContactTable.uid],
     name = this[ContactTable.name],
     note = this[ContactTable.note],
-    createdAt = this[ContactTable.created_at],
-    updatedAt = this[ContactTable.updated_at],
+    createdAt = this[ContactTable.createdAt],
+    updatedAt = this[ContactTable.updatedAt],
+    userUid = this[ContactTable.userUid],
 )

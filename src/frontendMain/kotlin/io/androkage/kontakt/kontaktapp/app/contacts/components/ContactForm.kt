@@ -51,7 +51,6 @@ fun Container.contactForm(
             TextArea(label = "Note: ") {
                 placeholder = "Any other information..."
             },
-            required = false
         )
     }
     buttonGroup {
@@ -73,7 +72,5 @@ fun Container.contactForm(
         }
     }
 
-    // addAfterInsertHook {
-        contactForm.setData(formDto)
-    // }
+    contactForm.setData(formDto)
 }

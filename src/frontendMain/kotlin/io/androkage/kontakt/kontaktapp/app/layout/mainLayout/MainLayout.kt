@@ -5,6 +5,7 @@ import com.copperleaf.ballast.navigation.routing.build
 import com.copperleaf.ballast.navigation.routing.directions
 import io.androkage.kontakt.kontaktapp.app.AppRouter
 import io.androkage.kontakt.kontaktapp.app.AppRouterViewModel
+import io.androkage.kontakt.kontaktapp.app.layout.shared.appHeader.appHeader
 import io.kvision.core.Container
 import io.kvision.html.*
 import io.kvision.state.bind
@@ -12,37 +13,13 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 fun Container.mainLayout(headerTitle: String, content: Container.() -> Unit) : KoinComponent = object : KoinComponent {
+    private val mainLayoutViewModel by inject<MainLayoutViewModel>()
     private val routerViewModel by inject<AppRouterViewModel>()
 
     init {
         div().bind(routerViewModel) { appRouter ->
             val currentRoute = appRouter.backstack.last()
             val currentRouteUrl = currentRoute.originalDestinationUrl
-
-            header(className = "navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow") {
-                link("App Name", className = "navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6") {
-
-                }
-                button("", className = "navbar-toggler position-absolute d-md-none collapsed") {
-                    setAttribute("data-bs-collapse", "collapse")
-                    setAttribute("data-bs-target", "#sidebarMenu")
-                    setAttribute("aria-controls", "sidebarMenu")
-                    setAttribute("aria-expanded", "false")
-                    setAttribute("aria-label", "Toggle navigation")
-                    span(className = "navbar-toggler-icon") { }
-                }
-                input(className = "form-control form-control-dark w-100 rounded-0 border-0", type = InputType.TEXT) {
-                    placeholder = "Search"
-                    setAttribute("aria-label", "Search")
-                }
-                div(className = "navbar-nav") {
-                    div(className = "nav-item text-nowrap") {
-                        link("Sign Out", className = "nav-link px-3") {
-                            url = "#"
-                        }
-                    }
-                }
-            }
 
             div(className = "container-fluid") {
                 div(className = "row") {
@@ -54,15 +31,6 @@ fun Container.mainLayout(headerTitle: String, content: Container.() -> Unit) : K
                                     link("Dashboard", className = "nav-link", icon = "bi bi-house-door") {
                                         setAttribute("aria-current", "page")
                                         url = "#${AppRouter.Home.directions().build()}"
-                                        onClick {
-                                            routerViewModel.trySend(
-                                                RouterContract.Inputs.GoToDestination(
-                                                    AppRouter.Home
-                                                        .directions()
-                                                        .build()
-                                                )
-                                            )
-                                        }
                                         if (currentRouteUrl == AppRouter.Home.directions().build()) {
                                             addCssClass("active")
                                         }
@@ -71,16 +39,7 @@ fun Container.mainLayout(headerTitle: String, content: Container.() -> Unit) : K
                                 li(className = "nav-item") {
                                     link("Contacts", className = "nav-link", icon = "bi bi-file-earmark") {
                                         url = "#${AppRouter.ContactList.directions().build()}"
-                                        onClick {
-                                            routerViewModel.trySend(
-                                                RouterContract.Inputs.GoToDestination(
-                                                    AppRouter.ContactList
-                                                        .directions()
-                                                        .build()
-                                                )
-                                            )
-                                        }
-                                        if (currentRouteUrl == AppRouter.ContactList.directions().build()) {
+                                        if (currentRouteUrl.startsWith("/contacts")) {
                                             addCssClass("active")
                                         }
                                     }
@@ -120,5 +79,8 @@ fun Container.mainLayout(headerTitle: String, content: Container.() -> Unit) : K
                 }
             }
         }
+
+        // Dispatch Initialization Event
+        mainLayoutViewModel.trySend(MainLayoutContract.Inputs.Initialize)
     }
 }

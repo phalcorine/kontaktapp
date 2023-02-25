@@ -1,4 +1,4 @@
-package io.androkage.kontakt.kontaktapp.app.landing.pages.LandingPage
+package io.androkage.kontakt.kontaktapp.app.layout.mainLayout
 
 import com.copperleaf.ballast.core.BasicViewModel
 import com.copperleaf.ballast.BallastViewModelConfiguration
@@ -6,20 +6,21 @@ import com.copperleaf.ballast.build
 import com.copperleaf.ballast.withViewModel
 import kotlinx.coroutines.CoroutineScope
 
-class LandingPageViewModel(
+class MainLayoutViewModel(
     coroutineScope: CoroutineScope,
     configBuilder: BallastViewModelConfiguration.Builder,
-    eventHandler: LandingPageEventHandler
+    inputHandler: MainLayoutInputHandler,
+    eventHandler: MainLayoutEventHandler
 ) : BasicViewModel<
-        LandingPageContract.Inputs,
-        LandingPageContract.Events,
-        LandingPageContract.State>(
+        MainLayoutContract.Inputs,
+        MainLayoutContract.Events,
+        MainLayoutContract.State>(
     coroutineScope = coroutineScope,
     config = configBuilder
         .withViewModel(
-            inputHandler = LandingPageInputHandler(),
-            initialState = LandingPageContract.State(),
-            name = "LandingPage",
+            inputHandler = inputHandler,
+            initialState = MainLayoutContract.State(),
+            name = "MainLayout",
         )
         .build(),
     eventHandler = eventHandler,

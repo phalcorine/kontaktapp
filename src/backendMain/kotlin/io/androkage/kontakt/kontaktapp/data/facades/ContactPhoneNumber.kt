@@ -43,6 +43,7 @@ object ContactPhoneNumberFacadeDatabaseImpl : ContactPhoneNumberFacade {
                         this[ContactPhoneNumberTable.contact_uid] = contactUid
                     }
             }
+
             Unit
         }.mapLeft {
             DomainError.DatabaseError(it)
@@ -55,6 +56,7 @@ object ContactPhoneNumberFacadeDatabaseImpl : ContactPhoneNumberFacade {
                 ContactPhoneNumberTable
                     .deleteWhere { ContactPhoneNumberTable.contact_uid eq contactUid }
             }
+
             Unit
         }.mapLeft {
             DomainError.DatabaseError(it)
@@ -66,40 +68,32 @@ object ContactPhoneNumberFacadeInMemoryImpl : ContactPhoneNumberFacade {
     private val contactPhoneNumberStore: MutableList<ContactPhoneNumberDto> = mutableListOf()
 
     override suspend fun listByContactUid(contactUid: String): Either<DomainError, List<ContactPhoneNumberDto>> {
-        return Either.catch {
-                contactPhoneNumberStore
-                    .filter { it.contactUid == contactUid }
-        }.mapLeft {
-            DomainError.DatabaseError(it)
-        }
+        val contactPhoneNumbers = contactPhoneNumberStore
+            .filter { it.contactUid == contactUid }
+
+        return Either.Right(contactPhoneNumbers)
     }
 
     override suspend fun insertByContactUid(
         contactUid: String,
         data: List<UpdateContactPhoneNumberDto>
     ): Either<DomainError, Unit> {
-        return Either.catch {
-                contactPhoneNumberStore
-                    .addAll(data.map {
-                        ContactPhoneNumberDto(
-                            phoneNumber = it.phoneNumber,
-                            contactUid = contactUid
-                        )
-                    })
-            Unit
-        }.mapLeft {
-            DomainError.DatabaseError(it)
-        }
+        contactPhoneNumberStore
+            .addAll(data.map {
+                ContactPhoneNumberDto(
+                    phoneNumber = it.phoneNumber,
+                    contactUid = contactUid
+                )
+            })
+
+        return Either.Right(Unit)
     }
 
     override suspend fun deleteByContactUid(contactUid: String): Either<DomainError, Unit> {
-        return Either.catch {
-                contactPhoneNumberStore
-                    .removeIf { it.contactUid == contactUid }
-            Unit
-        }.mapLeft {
-            DomainError.DatabaseError(it)
-        }
+        contactPhoneNumberStore
+            .removeIf { it.contactUid == contactUid }
+
+        return Either.Right(Unit)
     }
 
 }

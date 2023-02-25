@@ -3,10 +3,10 @@ package io.androkage.kontakt.kontaktapp.app.contacts.pages.contactDetail
 import com.copperleaf.ballast.InputHandler
 import com.copperleaf.ballast.InputHandlerScope
 import com.copperleaf.ballast.postInput
-import io.androkage.kontakt.kontaktapp.endpoints.ContactEndpointService
+import io.androkage.kontakt.kontaktapp.endpoints.IContactEndpointService
 
 class ContactDetailPageInputHandler(
-    private val contactEndpointService: ContactEndpointService
+    private val contactEndpointService: IContactEndpointService
 ) : InputHandler<
         ContactDetailPageContract.Inputs,
         ContactDetailPageContract.Events,
@@ -20,39 +20,55 @@ class ContactDetailPageInputHandler(
         is ContactDetailPageContract.Inputs.Initialize -> {
             updateState { it.copy(loading = true) }
 
-            val eitherResult = contactEndpointService.findByUid(input.contactUid)
-            eitherResult.fold({ error ->
-                updateState { state -> state.copy(loading = true) }
-                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message))
-            }, { apiResponse ->
-                updateState { state -> state.copy(loading = false, contact = apiResponse.data) }
+            val apiResult = runCatching {
+                contactEndpointService.findByUid(input.contactUid)
+            }.getOrElse {
+                Result.failure(it)
+            }
+
+            apiResult.fold({ response ->
+                updateState { state -> state.copy(loading = false, contact = response.data) }
                 postEvent(ContactDetailPageContract.Events.SuccessMessage("Contact loaded successfully!"))
+            }, { error ->
+                updateState { state -> state.copy(loading = true) }
+                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message ?: "API Error!"))
             })
         }
 
         is ContactDetailPageContract.Inputs.UpdateContact -> {
             updateState { state -> state.copy(loading = true) }
-            val eitherResult = contactEndpointService.update(input.contactUid, input.data)
-            eitherResult.fold({ error ->
+
+            val apiResult = runCatching {
+                contactEndpointService.update(input.contactUid, input.data)
+            }.getOrElse {
+                Result.failure(it)
+            }
+
+            apiResult.fold({ _ ->
                 updateState { state -> state.copy(loading = false) }
-                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message))
-            }) { _ ->
-                updateState { state -> state.copy(loading = false) }
-                postInput(ContactDetailPageContract.Inputs.Initialize(input.contactUid))
                 postInput(ContactDetailPageContract.Inputs.DisableEditMode)
+                postInput(ContactDetailPageContract.Inputs.Initialize(input.contactUid))
+            }) { error ->
+                updateState { state -> state.copy(loading = false) }
+                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message ?: "API Error!"))
             }
         }
 
         is ContactDetailPageContract.Inputs.DeleteContact -> {
             updateState { state -> state.copy(loading = true) }
 
-            val eitherResult = contactEndpointService.delete(input.contactUid)
-            eitherResult.fold({ error ->
-                updateState { state -> state.copy(loading = false) }
-                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message))
-            }) { _ ->
+            val apiResult = runCatching {
+                contactEndpointService.delete(input.contactUid)
+            }.getOrElse {
+                Result.failure(it)
+            }
+
+            apiResult.fold({ _ ->
                 updateState { state -> state.copy(loading = false) }
                 postEvent(ContactDetailPageContract.Events.NavigateToContactDetailPage)
+            }) { error ->
+                updateState { state -> state.copy(loading = false) }
+                postEvent(ContactDetailPageContract.Events.ErrorMessage(error.message ?: "API Error!"))
             }
         }
 

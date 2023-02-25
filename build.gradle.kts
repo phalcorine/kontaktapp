@@ -30,6 +30,7 @@ val koinKtorVersion: String by project
 val koinVersion: String by project
 val mysqlVersion: String by project
 val serializationVersion: String by project
+val favreBcryptVersion: String by project
 
 val webDir = file("src/frontendMain/web")
 val mainClassName = "io.ktor.server.netty.EngineMain"
@@ -74,7 +75,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                api("io.kvision:kvision-server-ktor-koin:$kvisionVersion")
+                api("io.kvision:kvision-server-ktor-koin:$kvisionVersion")
 
                 // Kotlinx Datetime
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:$kotlinxDatetimeVersion")
@@ -88,6 +89,7 @@ kotlin {
                 // Ktor
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-auth:$ktorVersion")
 
                 // Koin
                 implementation("io.insert-koin:koin-core:$koinVersion")
@@ -106,6 +108,7 @@ kotlin {
                 implementation(kotlin("reflect"))
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("io.ktor:ktor-server-auth:$ktorVersion")
+                implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
                 implementation("io.ktor:ktor-server-compression:$ktorVersion")
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-server-cors:$ktorVersion")
@@ -127,6 +130,9 @@ kotlin {
                 implementation("io.insert-koin:koin-ktor:$koinKtorVersion")
                 // SLF4J Logger for Koin
                 implementation("io.insert-koin:koin-logger-slf4j:$koinKtorVersion")
+
+                // Bcrypt
+                implementation("at.favre.lib:bcrypt:$favreBcryptVersion")
             }
         }
         val backendTest by getting {

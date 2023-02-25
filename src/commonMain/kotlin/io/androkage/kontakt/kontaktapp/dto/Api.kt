@@ -4,7 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiDataResource<T>(
-    val data: T
+    val data: T,
+    val message: String = "Successful!"
+)
+
+@Serializable
+data class ApiSuccessResponse(
+    val message: String
 )
 
 @Serializable

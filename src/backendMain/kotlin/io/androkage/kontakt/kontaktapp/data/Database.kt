@@ -3,6 +3,7 @@ package io.androkage.kontakt.kontaktapp.data
 import io.androkage.kontakt.kontaktapp.data.entities.ContactEmailTable
 import io.androkage.kontakt.kontaktapp.data.entities.ContactPhoneNumberTable
 import io.androkage.kontakt.kontaktapp.data.entities.ContactTable
+import io.androkage.kontakt.kontaktapp.data.entities.UserTable
 import io.androkage.kontakt.kontaktapp.plugins.DatabaseConfig
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
@@ -29,6 +30,7 @@ object DatabaseFactory {
                 ContactTable,
                 ContactEmailTable,
                 ContactPhoneNumberTable,
+                UserTable
             )
         }
     }
